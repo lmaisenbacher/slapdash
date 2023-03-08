@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "slapdash"
-version = "1.0.0"
+version = "1.0.1"
 description = "Create device and application control dashboards instantly"
 authors = ["Matt Grau <graum@phys.ethz.ch>", "Chris Axline <chris@axlines.org>", "Carmelo Mordini <cmordini@phys.ethz.ch>"]
 readme = "README.md"
@@ -14,7 +14,6 @@ uvicorn = "^0.20.0"
 aiofiles = "^22.1.0"
 python-socketio = "^4.6.1"
 websockets = "^10.4"
-msgpack = {version = "^1.0.4", optional = true}
 matplotlib = {version = "*", optional = true}
 
 [tool.poetry.group.dev.dependencies]
