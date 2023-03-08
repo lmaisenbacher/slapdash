@@ -55,3 +55,7 @@ class Device:
 into this:
 
 ![](./docs/images/fast-api-example.png)
+
+# Credits
+
+Slapdash was developed in the [TIQI group](https://tiqi.ethz.ch/) at ETH Zürich, primarily by [Matt Grau](https://www.odu.edu/directory/matt-grau).
