@@ -1,0 +1,89 @@
+site_name: Slapdash
+site_url:
+repo_url: https://github.com/cathaychris/slapdash
+edit_uri: tree/docs/docs
+repo_name: slapdash
+
+nav:
+  - Home: index.md
+  - User Guide:
+    - Installation: installation.md
+    - Getting Started: getting_started.md
+    - Plugin components: components.md
+    - Clients: clients.md
+  - Features:
+    - Metadata: features/metadata.md
+    - Decorators: features/decorators.md
+  - Reference:
+    - API Reference:
+      - reference/api/main.md
+      - reference/api/model.md
+      - reference/api/plugin.md
+      - reference/api/client.md
+      - reference/api/web.md
+      - reference/api/metadata.md
+      - reference/api/decorators.md
+      # - reference/api/examples.md
+      # - reference/api/testing.md
+    - Internals: reference/internals.md
+    - Development: reference/development.md
+
+theme:
+  #   logo: img/atom.svg
+  #   favicon: img/atom.svg
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.top
+    - navigation.expand
+    - navigation.sections
+    - earch.highlight
+    - search.suggest
+  palette:
+    - scheme: default
+      media: "(prefers-color-scheme: light)"
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - scheme: slate
+      primary: red
+      accent: red
+      media: "(prefers-color-scheme: dark)"
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/gitlab
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+#   - javascripts/mathjax.js
+#   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+        alternate_style: true
+  - pymdownx.emoji:
+        emoji_index: !!python/name:materialx.emoji.twemoji
+        emoji_generator: !!python/name:materialx.emoji.to_svg
+  - toc:
+      permalink: true
+
+extra_css:
+  - css/custom.css
+
+plugins:
+  - search
+  - include-markdown
+  - mkdocstrings:
+      watch:
+        - slapdash
+  - gen-files:
+      scripts:
+        - docs/scripts/gen_metadata_docs.py  # or any other name or path

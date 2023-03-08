@@ -1,0 +1,9 @@
+{
+    "missiles": 4,
+    "bombers": 1,
+    "ammo": {
+        "bombs": 10,
+        "miniguns": 10,
+        "tanks": 270
+    }
+}

@@ -1,0 +1,37 @@
+stages:
+  - prepare
+  - build
+
+cache:
+  key: python-venv
+  paths:
+    - .venv
+
+prepare:
+  stage: prepare
+  tags:
+    - py3.8
+  script:
+    - python -m venv .venv
+    - source .venv/bin/activate
+    - BASE_URL=`echo $CI_REPOSITORY_URL | sed "s;\/*$CI_PROJECT_PATH.*;;"`
+    - pip install .[dev,docs]
+
+test:
+  stage: build
+  tags:
+    - py3.8
+  script:
+    - source .venv/bin/activate
+    - pytest -v
+
+build-docs:
+  stage: build
+  tags:
+    - py3.8
+  script:
+    - source .venv/bin/activate
+    - mkdocs build
+    - cp -r site /home/wwwslapdocs/public/slapdash
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"

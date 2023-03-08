@@ -1,0 +1,3 @@
+# model
+
+::: slapdash.model

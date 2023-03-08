@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "slapdash"
+version = "1.0.0"
+description = "Create device and application control dashboards instantly'"
+authors = ["Matt Grau <graum@phys.ethz.ch>", "Chris Axline <chris@axlines.org>", "Carmelo Mordini <cmordini@phys.ethz.ch>"]
+readme = "README.md"
+packages = [{include = "slapdash"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+requests = "^2.28.1"
+fastapi = "^0.88.0"
+uvicorn = "^0.20.0"
+aiofiles = "^22.1.0"
+python-socketio = "^4.6.1"
+websockets = "^10.4"
+msgpack = {version = "^1.0.4", optional = true}
+matplotlib = {version = "*", optional = true}
+
+[tool.poetry.group.dev.dependencies]
+pylint = "*"
+autopep8 = "*"
+pytest = "*"
+pytest-cov = "*"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "*"
+mkdocs-material = "*"
+mkdocs-include-markdown-plugin = "*"
+mkdocs-gen-files = "*"
+mkdocstrings = "*"
+
+[tool.poetry.extras]
+examples = ["matplotlib"]
+
+[tool.setuptools.package-data]
+slapdash = ['frontend/*', 'examples/*', 'version.json']
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

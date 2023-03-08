@@ -1,0 +1,3 @@
+# metadata
+
+::: slapdash.metadata
