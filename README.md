@@ -56,6 +56,13 @@ into this:
 
 ![](./docs/images/fast-api-example.png)
 
+Try running this example with
+
+```python
+from slapdash.examples import run_example
+run_example('doc_example')
+```
+
 # Credits
 
 Slapdash was developed in the [TIQI group](https://tiqi.ethz.ch/) at ETH Zürich, primarily by [Matt Grau](https://www.odu.edu/directory/matt-grau).
