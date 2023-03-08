@@ -5,7 +5,7 @@
   "scripts": {
     "start": "parcel index.html",
     "watch": "parcel watch index.html --out-dir ../slapdash/frontend",
-    "build": "parcel build index.html custom.js --out-dir ../slapdash/frontend --no-source-maps --no-content-hash custom.css plugin.css index.js"
+    "build": "parcel build index.html custom.js --out-dir ../slapdash/frontend --no-source-maps --no-content-hash custom.css dashboard.css index.js"
   },
   "main": "src/index.tsx",
   "repository": "https://github.com/cathaychris/slapdash",

@@ -4,7 +4,7 @@ import random
 
 @slapdash.refresh('graph', 0.5)
 @slapdash.refresh('double_graph', 0.5)
-class DatastreamPlugin:
+class DatastreamDashboard:
     '''This model demonstrates the metadata decorator and the `isDataStream` property,
     which causes the property to be rendered as a line series.'''
 
@@ -24,4 +24,4 @@ class DatastreamPlugin:
 
 
 if __name__ == '__main__':
-    slapdash.run(DatastreamPlugin())
+    slapdash.run(DatastreamDashboard())

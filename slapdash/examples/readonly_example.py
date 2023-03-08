@@ -1,7 +1,7 @@
 import slapdash
 
 
-class ReadonlyPlugin:
+class ReadonlyDashboard:
     '''This model creates attributes based on properties
     that only have `getter` functions, and thus become
     read-only in the interface. In the interface, they
@@ -76,4 +76,4 @@ class ReadonlyPlugin:
 
 
 if __name__ == '__main__':
-    slapdash.run(ReadonlyPlugin())
+    slapdash.run(ReadonlyDashboard())

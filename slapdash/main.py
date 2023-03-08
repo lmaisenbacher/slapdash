@@ -20,7 +20,7 @@ def run(interface,
     Start an instance of the Slapdash server
 
     Args:
-        host (str='0.0.0.0'): The host to use for the plugin server. Defaults to '0.0.0.0', which binds to all interfaces
+        host (str='0.0.0.0'): The host to use for the dashboard server. Defaults to '0.0.0.0', which binds to all interfaces
 
         port (int=8000): The port for the web REST interface of the server. Defaults to 8000
 
@@ -31,7 +31,7 @@ def run(interface,
         where `info` will include the data model name, slapdash version, web port, and any supplied `web_settings`.
         They should return a server instance with the method `serve()` that mirrors that of `uvicorn.Server`.
 
-        loop (None): Specify an event loop to use to run all servers, in case you would prefer that the plugin not create its own.
+        loop (None): Specify an event loop to use to run all servers, in case you would prefer that the dashboard not create its own.
 
     Optional kwargs used in the web interface:
 
@@ -63,8 +63,8 @@ def run(interface,
     else:
         asyncio.set_event_loop(loop)
 
-    # if wrapped with @Saver, attach PluginSavingInterface's saving callback to all model changes
-    if 'PluginSavingInterface' in [c.__name__ for c in type(data_model._interface).__mro__]:
+    # if wrapped with @Saver, attach DashboardSavingInterface's saving callback to all model changes
+    if 'DashboardSavingInterface' in [c.__name__ for c in type(data_model._interface).__mro__]:
         data_model_emit = data_model.emit
 
         def emit(message):

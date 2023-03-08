@@ -1,3 +1,3 @@
-# plugin
+# dashboard
 
-::: slapdash.plugin
+::: slapdash.dashboard

@@ -21,7 +21,7 @@ class Device:
     voltage = 0.0
 
 
-class MetadataPlugin:
+class MetadataDashboard:
     '''This model demonstrates the kinds of metadata properties that may be assigned
     to model attributes.
     - The `renderAs` property assigned to `image` causes it to be
@@ -75,4 +75,4 @@ class MetadataPlugin:
 
 
 if __name__ == '__main__':
-    slapdash.run(MetadataPlugin(), port=8000)
+    slapdash.run(MetadataDashboard(), port=8000)

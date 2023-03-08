@@ -36,7 +36,7 @@ class Simple1:
         self.sub = Sub()
 
 
-def make_plugin_with_saver(tmp_path, settings):
+def make_dashboard_with_saver(tmp_path, settings):
     settings_path = tmp_path / 's.json'
     with open(settings_path, 'w') as f:
         json.dump(settings, f)
@@ -56,21 +56,21 @@ def test_saver(tmp_path):
         'a_enum': 'blue'
     }
 
-    plugin = make_plugin_with_saver(tmp_path, settings)
+    dashboard = make_dashboard_with_saver(tmp_path, settings)
     # testing the effect of the decorator
-    assert isinstance(plugin, Simple1)
-    assert type(plugin).__name__ == 'PluginSavingInterface'
+    assert isinstance(dashboard, Simple1)
+    assert type(dashboard).__name__ == 'DashboardSavingInterface'
 
-    assert plugin.a_float == 10.0
-    assert isinstance(plugin.a_float, float)
-    assert plugin.a_int == 1
-    assert isinstance(plugin.a_int, int)
-    assert plugin.array_int == [11, 12, 13, 14]
-    assert plugin.array_mix == [1, 0.2, True, 'the test']
-    assert plugin.sub.value == 1.0
-    assert isinstance(plugin.sub.value, float)
-    assert plugin.a_enum == Color.BLUE
-    assert isinstance(plugin.a_enum, Enum)
+    assert dashboard.a_float == 10.0
+    assert isinstance(dashboard.a_float, float)
+    assert dashboard.a_int == 1
+    assert isinstance(dashboard.a_int, int)
+    assert dashboard.array_int == [11, 12, 13, 14]
+    assert dashboard.array_mix == [1, 0.2, True, 'the test']
+    assert dashboard.sub.value == 1.0
+    assert isinstance(dashboard.sub.value, float)
+    assert dashboard.a_enum == Color.BLUE
+    assert isinstance(dashboard.a_enum, Enum)
 
 
 def test_saver_bad_settings(tmp_path):
@@ -80,7 +80,7 @@ def test_saver_bad_settings(tmp_path):
     #     'some_param': 1.0
     # }
     # with pytest.raises(Exception):  # TODO: make it more explicit
-    #     make_plugin_with_saver(tmp_path, bad_settings)
+    #     make_dashboard_with_saver(tmp_path, bad_settings)
 
     # non existing param in children: this prints a logger message at level WARNING
     # bad_settings = {
@@ -89,27 +89,27 @@ def test_saver_bad_settings(tmp_path):
     #     }
     # }
     # with pytest.raises(Exception):  # TODO: make it more explicit
-    #     make_plugin_with_saver(tmp_path, bad_settings)
+    #     make_dashboard_with_saver(tmp_path, bad_settings)
 
     # Existing parameter with wrong type
     bad_settings = {
         'a_int': 1.0
     }
     with pytest.raises(TypeError, match='Cannot override class parameter'):
-        make_plugin_with_saver(tmp_path, bad_settings)
+        make_dashboard_with_saver(tmp_path, bad_settings)
 
     # existing enum, wrong value. Exceptions will be raised by the Enum constructor
     bad_settings = {
         'a_enum': 1.0
     }
     with pytest.raises(ValueError, match=f"is not a valid {type(Simple1.a_enum).__name__}"):
-        make_plugin_with_saver(tmp_path, bad_settings)
+        make_dashboard_with_saver(tmp_path, bad_settings)
 
     bad_settings = {
         'a_enum': 'yellow'
     }
     with pytest.raises(ValueError, match=f"is not a valid {type(Simple1.a_enum).__name__}"):
-        make_plugin_with_saver(tmp_path, bad_settings)
+        make_dashboard_with_saver(tmp_path, bad_settings)
 
     bad_settings = {
         'sub': {
@@ -117,4 +117,4 @@ def test_saver_bad_settings(tmp_path):
         }
     }
     with pytest.raises(TypeError, match='Cannot override class parameter'):
-        make_plugin_with_saver(tmp_path, bad_settings)
+        make_dashboard_with_saver(tmp_path, bad_settings)

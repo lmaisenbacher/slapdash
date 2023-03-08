@@ -11,7 +11,7 @@ class Ammo:
 class Interface:
     '''This model demonstrates the effect of the `Saver` decorator,
     which means that attributes present in the `examples/settings.json`
-    schema will be loaded into the plugin when it first runs, and saved
+    schema will be loaded into the dashboard when it first runs, and saved
     back into the JSON file whenever they are changed.'''
 
     ammo = Ammo()

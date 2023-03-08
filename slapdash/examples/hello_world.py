@@ -6,7 +6,7 @@ class HelloWorld:
     and should display this in a textbox in the interface.
     It can be changed by the user.'''
     
-    message = 'Hello! I am a plugin.'
+    message = 'Hello! I am a slapdash dashboard.'
 
 
 if __name__ == '__main__':

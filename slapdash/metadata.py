@@ -82,7 +82,7 @@ def sanitize_metadata(interface):
     - Metadata must be assigned to an property whose type complies with the spec
     - If there are discrete allowable values, the value must be in that list
 
-    Any exception to this will throw a warning at Plugin creation, and the corresponding
+    Any exception to this will throw a warning at Dashboard creation, and the corresponding
     entry is ignored and removed from the _metadata dictionary
     """
     metadata = interface._metadata

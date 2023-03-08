@@ -363,7 +363,7 @@ def get_shape(lst, shape=()):
         return shape
 
     # peek ahead and assure all lists in the next depth
-    # have the same length (also critical for the plugin!)
+    # have the same length (also critical for the dashboard!)
     if isinstance(lst[0], Sequence) and not isinstance(lst, str):
         l = len(lst[0])
         if not all(len(item) == l for item in lst):

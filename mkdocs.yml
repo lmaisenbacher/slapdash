@@ -9,7 +9,7 @@ nav:
   - User Guide:
     - Installation: installation.md
     - Getting Started: getting_started.md
-    - Plugin components: components.md
+    - dashboard components: components.md
     - Clients: clients.md
   - Features:
     - Metadata: features/metadata.md
@@ -18,7 +18,7 @@ nav:
     - API Reference:
       - reference/api/main.md
       - reference/api/model.md
-      - reference/api/plugin.md
+      - reference/api/dashboard.md
       - reference/api/client.md
       - reference/api/web.md
       - reference/api/metadata.md
@@ -78,7 +78,7 @@ markdown_extensions:
 extra_css:
   - css/custom.css
 
-plugins:
+dashboards:
   - search
   - include-markdown
   - mkdocstrings:

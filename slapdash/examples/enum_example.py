@@ -19,7 +19,7 @@ class DisplayType(Enum):
     POWER = "display power"
 
 
-class ColorfulPlugin:
+class ColorfulDashboard:
     '''This model demonstrates the enumerator data type,
     which will appear as a drop-down box in the interface
     from which you can select an option. The value passed
@@ -41,4 +41,4 @@ class ColorfulPlugin:
 
 
 if __name__ == '__main__':
-    slapdash.run(ColorfulPlugin(), port=8002)
+    slapdash.run(ColorfulDashboard(), port=8002)

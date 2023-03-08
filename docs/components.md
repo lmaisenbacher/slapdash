@@ -1,8 +1,8 @@
-# Plugin components
+# Dashboard components
 
-Every object inside the plugin interface gets exposed by the server(s) according to its type.
+Every object inside the dashboard interface gets exposed by the server(s) according to its type.
 
-Although Python is not statically typed, which is a good thing, the plugin uses the type information to build the input boxes in the web frontend, and sends it to clients that could require it (e.g. because _they_ are statically typed, like Ionizer (C++) or the web frontend itself (Typescript)).
+Although Python is not statically typed, which is a good thing, the dashboard uses the type information to build the input boxes in the web frontend, and sends it to clients that could require it (e.g. because _they_ are statically typed, like Ionizer (C++) or the web frontend itself (Typescript)).
 Therefore we recommend using [type hints](https://docs.python.org/3/library/typing.html).
 
 ## Class and instance attributes
@@ -29,7 +29,7 @@ Attributes of four `BASE_TYPES`: `int`, `str`, `bool`, and `float`, are rendered
 
 ### Hidden attributes
 
-Attributes named with a leading underscore (e.g. `_hidden`) are never rendered by the plugin. This is useful to implement internal functionalities.
+Attributes named with a leading underscore (e.g. `_hidden`) are never rendered by the dashboard. This is useful to implement internal functionalities.
 
 ## Properties
 
@@ -81,7 +81,7 @@ Lists are rendered with multiple boxes. Lists with object of different types are
 
 ## Dicts
 
-Dictionaries cannot be exposed by the server, hence they are not allowed inside a plugin (if not hidden). The preferred way to obtain a nested structure with named attributes is to define a class for it.
+Dictionaries cannot be exposed by the server, hence they are not allowed inside a dashboard (if not hidden). The preferred way to obtain a nested structure with named attributes is to define a class for it.
 
 ## Classes
 

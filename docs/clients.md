@@ -1,8 +1,8 @@
 # Clients
 
-Clients allow accessing a plugin from the command line, a web interface, or python scripts (perhaps from another plugin :wink:).
+Clients allow accessing a dashboard from the command line, a web interface, or python scripts (perhaps from another dashboard :wink:).
 
-To access this plugin
+To access this dashboard
 
 ```python
 import slapdash
@@ -49,14 +49,14 @@ slapdash implements clients for the two type of supported servers, `rpc` and `re
     client = Client(hostname, port=8001, client_type='request')
     ```
 
-And they both provide the same access to the plugin. The exposed objects in the interface can be nicely accessed as attributes of the client -- and tab completion works too!
+And they both provide the same access to the dashboard. The exposed objects in the interface can be nicely accessed as attributes of the client -- and tab completion works too!
 
 ## Attributes, properties, objects
 
 ```python
 >>> client.voltage
 0.0
->>> client.voltage = 1.1  # The plugin shell will print 'Setting voltage'
+>>> client.voltage = 1.1  # The dashboard shell will print 'Setting voltage'
 >>> client.voltage
 1.1
 ```
@@ -99,6 +99,6 @@ Easy peasy
 
 # Web interface
 
-The package ships with a default frontend GUI accessible through a web browser, written in JavaScript/React. The GUI is designed to accept and render the plugin data model, and values are synced among the server (and all clients) through a persistent WebSocket connection. Documentation for a plugin is auto-generated, and endpoints can be viewed and tested at `http://<server>:<port>/docs`.
+The package ships with a default frontend GUI accessible through a web browser, written in JavaScript/React. The GUI is designed to accept and render the dashboard data model, and values are synced among the server (and all clients) through a persistent WebSocket connection. Documentation for a dashboard is auto-generated, and endpoints can be viewed and tested at `http://<server>:<port>/docs`.
 
 A custom GUI folder can be supplied (see arguments of `run`) that will be served to the user. For simple stylistic adjustments, a `custom.css` stylesheet file can be supplied to modify the default GUI styling (see the `custom_css` example). Alternatively, simple extensions or modifications to the frontend can be performed by supplying your own `custom.js` script within the frontend folder, which will be loaded along with the application.

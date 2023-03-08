@@ -24,7 +24,7 @@ class SliderSubclass:
         self._float_prop = value
         
 @refresh('readonly_slider', 1.)
-class SliderPlugin:
+class SliderDashboard:
     number: float = 111.0
     _float_prop: float = 5.0
     _another_prop: float = 4.0
@@ -98,7 +98,7 @@ class SliderPlugin:
 
 
 if __name__ == '__main__':
-    slapdash.run(SliderPlugin(), port=8000)
+    slapdash.run(SliderDashboard(), port=8000)
 
     # Run with: python -m slapdash.examples slider_example
     # Open in Browser: http://localhost:8000

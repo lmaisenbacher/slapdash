@@ -73,7 +73,7 @@ def refresh(attr: str, delay: int = 1, delay_attr: str = None):
                         await asyncio.sleep(_delay)
 
                 loop = asyncio.get_event_loop()
-                loop.call_soon(lambda: create_plugin_task(start_counter(), loop))
+                loop.call_soon(lambda: create_dashboard_task(start_counter(), loop))
         Wrapped.__name__ = cls.__name__
         return Wrapped
     return decorator
@@ -184,11 +184,11 @@ def trigger_update(target_attr: str):
     return decorator
 
 def saver_original_class_name(cls):
-    '''Use in code where a PluginSavingInterface is known to be the wrapper.
+    '''Use in code where a DashboardSavingInterface is known to be the wrapper.
     This will extract the name of the class that is wrapped by the Saver.'''
     mro = cls.__class__.__mro__
     name = cls.__class__.__name__
-    if 'PluginSavingInterface' in [m.__name__ for m in mro]:
+    if 'DashboardSavingInterface' in [m.__name__ for m in mro]:
         try:
             name = mro[1].__name__
         except:
@@ -272,7 +272,7 @@ class Saver:
 
     def __call__(parent, cls):
         '''cls is what the decorator acts on'''
-        class PluginSavingInterface(cls):
+        class DashboardSavingInterface(cls):
             def __init__(self, *args, **kwargs):
                 super().__init__(*args, **kwargs)
                 self._settings = parent._settings
@@ -399,7 +399,7 @@ class Saver:
                     self._save_setting(updated_settings_name)
                 elif (updated_settings_name[:-1] in valid_settings_names):
                     self._save_setting(updated_settings_name[:-1])
-        return PluginSavingInterface
+        return DashboardSavingInterface
 
 def _get_result_and_raise_exceptions(task: asyncio.Task) -> None:
     '''Retrieves `task.result()` to reraise unaccessed exceptions.'''
@@ -411,7 +411,7 @@ def _get_result_and_raise_exceptions(task: asyncio.Task) -> None:
         # logging.exception('Exception raised by task = %r', task)
         raise
 
-def create_plugin_task(coro, loop) -> asyncio.Task:
+def create_dashboard_task(coro, loop) -> asyncio.Task:
     '''Wraps a task normally called with `create_task` in asyncio
     to properly "catch" exceptions that would normally not get
     retrieved, and thus would be prone to shut down the whole process.
@@ -422,7 +422,7 @@ def create_plugin_task(coro, loop) -> asyncio.Task:
     task.add_done_callback(_get_result_and_raise_exceptions)
     return task
 
-def run_plugin_coroutine_threadsafe(coro, loop) -> asyncio.Future:
+def run_dashboard_coroutine_threadsafe(coro, loop) -> asyncio.Future:
     '''Wraps a task normally called with `asyncio.run_coroutine_threadsafe`
     to properly "catch" exceptions that would normally not get
     retrieved, and thus would be prone to shut down the whole process.'''
