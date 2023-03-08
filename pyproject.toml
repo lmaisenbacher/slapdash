@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "slapdash"
 version = "1.0.0"
-description = "Create device and application control dashboards instantly'"
+description = "Create device and application control dashboards instantly"
 authors = ["Matt Grau <graum@phys.ethz.ch>", "Chris Axline <chris@axlines.org>", "Carmelo Mordini <cmordini@phys.ethz.ch>"]
 readme = "README.md"
 packages = [{include = "slapdash"}]
