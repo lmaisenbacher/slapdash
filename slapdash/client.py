@@ -5,7 +5,7 @@ import inspect
 import urllib
 from .model import BASE_TYPES
 from .version import __version__, __major__, __minor__
-
+from typing import Any
 
 class ComClient:
     pass
@@ -189,3 +189,50 @@ class Client:
         props = client('get_props')
 
         return make_class(client, name, props)
+
+
+class SimpleRequestClient:
+    '''Allows direct communication without error-checking or convenience attributes,
+    through `set(name, value)` and `get(name)` methods.'''
+
+    _url: str
+    _timeout: int
+
+    def __init__(self, hostname: str = 'localhost', port: int = 8000, timeout: int = 1):
+        if not (hostname.startswith('http://') or hostname.startswith('https://')):
+            hostname = 'http://' + hostname
+        o = urllib.parse.urlparse(hostname)
+        if o.port is not None:
+            port = o.port
+        self._url = f'{o.scheme}://{o.hostname}:{port}/'
+        self._timeout = timeout
+
+    def get(self, obj):
+        url = self._url
+        timeout = self._timeout
+        return object.__getattribute__(self, '__call__')(url+'get_param?name='+obj, timeout)
+    
+    def set(self, name: str, value: Any) -> None:
+        params = {'value': value}
+        endpoint = re.sub('\]', '', re.sub('\.|\[', '/', name))  # noqa
+        requests.post(self._url + endpoint,
+                      timeout=self._timeout, params=params)
+
+    def __call__(self, method_name: str, timeout=1., **kwargs):
+        req = requests.get(method_name,
+                           timeout=timeout, params=kwargs)
+        try:
+            return req.json()
+        except json.decoder.JSONDecodeError:
+            raise Exception('Server Error: {}'.format(req.text))
+
+class SimpleClient:
+    def __new__(cls,
+                 hostname: str = 'localhost',
+                 port: int = 8000,
+                 timeout: float = 1.):
+
+        client = SimpleRequestClient(hostname=hostname, port=port, timeout=timeout)
+
+        return client
+
