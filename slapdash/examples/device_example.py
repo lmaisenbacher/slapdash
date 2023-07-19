@@ -28,4 +28,4 @@ class Device:
 
 if __name__ == "__main__":
     hostname = 'localhost'
-    slapdash.run(Device(), host=hostname, port=8001)
+    slapdash.run(Device(), host=hostname)

@@ -75,4 +75,4 @@ class MetadataDashboard:
 
 
 if __name__ == '__main__':
-    slapdash.run(MetadataDashboard(), port=8000)
+    slapdash.run(MetadataDashboard())
