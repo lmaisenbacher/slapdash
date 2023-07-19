@@ -8,44 +8,69 @@ from .version import __version__
 
 
 def run(interface,
-        host: str = '0.0.0.0',
-        port: int = 8000,
-        enable_web: bool = True,
-        servers: list = [],
+        host: str='0.0.0.0',
+        port: int=8000,
+        enable_web: bool=True,
+        servers: list=[],
         loop=None,
-        web_settings: dict = {},
+        web_settings: dict={},
         *args, **kwargs
         ):
-    '''
-    Start an instance of the Slapdash server
+    """
+    Start an instance of the Slapdash server.
 
-    Args:
-        host (str='0.0.0.0'): The host to use for the dashboard server. Defaults to '0.0.0.0', which binds to all interfaces
+    Parameters
+    ----------
+    interface : class
+        Class describing device to be controlled.
+    host : str, optional
+        The host to use for the dashboard server.
+        The default is '0.0.0.0', which binds to all interfaces.
+    port : int, optional
+        The port for the web REST interface of the server. The default is 8000.
+    enable_web : bool, optional
+        Enable web server. Disable this in case you will only use your own add-in servers.
+        The default is True.
+    servers : list, optional
+        Any number of server factories that produce functions that spawn servers, which will share
+        the data model produced from `interface`. These functions should accept arguments
+        (data_model, info) and will be passed any additional (*args, **kwargs) supplied to `run()`,
+        where `info` will include the data model name, slapdash version, web port, and any supplied
+        `web_settings`.
+        They should return a server instance with the method `serve()` that mirrors that of
+        `uvicorn.Server`.
+        The default is [].
+    loop : asyncio event loop or None, optional
+        Specify an event loop to use to run all servers, in case you would prefer that the dashboard
+        not create its own. The default is None, in which case the current event loop is used.
+    web_settings : dict, optional
+        DESCRIPTION. The default is {}.
+    *args : TYPE
+        DESCRIPTION.
+    **kwargs : TYPE
+        DESCRIPTION.
 
-        port (int=8000): The port for the web REST interface of the server. Defaults to 8000
+    Optional kwargs used in the web interface
+    -------
+    frontend : str or None, optional
+        An absolute path for a folder containing files to serve on the root '/' endpoint of the web
+        interface. Defaults to None, in which case a built in frontend is used.
+    css : str or None, optional
+        An absolute path for a custom css file to override the styles of the built-in web gui.
+    enable_CORS : bool, optional
+        Uninhibits cross-origin resource sharing (CORS). CORS is useful for development.
+        The defaults is True.
+    web_notify_callback : str or None, optional
+        The name of a callback function in `interface` that will be called when notifications are
+        triggered via the web interface.
+    web_settings : dict, optional
+        Any settings you would like to make available at the `/info` endpoint of the REST API.
 
-        enable_web (bool=True): Disable this in case you will only use your own add-in servers.
+    Returns
+    -------
+    None.
 
-        servers (Server | list=[]): Any number of server factories that produce functions that spawn servers, which will share the data model produced from `interface`.
-        These functions should accept arguments (data_model, info) and will be passed any additional (*args, **kwargs) supplied to `run()`,
-        where `info` will include the data model name, slapdash version, web port, and any supplied `web_settings`.
-        They should return a server instance with the method `serve()` that mirrors that of `uvicorn.Server`.
-
-        loop (None): Specify an event loop to use to run all servers, in case you would prefer that the dashboard not create its own.
-
-    Optional kwargs used in the web interface:
-
-        frontend (str=None): An absolute path for a folder containing files to serve on the root '/' endpoint of the web interface. Defaults to None, in which case a built in frontend is used.
-
-        css (str=None): An absolute path for a custom css file to override the styles of the built-in web gui.
-
-        enable_CORS (bool=True): Uninhibits cross-origin resource sharing (CORS). CORS is useful for development. Defaults to True.
-
-        web_notify_callback (str=None): The name of a callback function in `interface` that will be called when notifications are triggered via the web interface.
-
-        web_settings (dict={}): Any settings you would like to make available at the `/info` endpoint of the REST API.
-    '''
-
+    """
     data_model = Model(interface)
     info = {
         'name': data_model.name,

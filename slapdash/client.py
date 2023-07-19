@@ -126,7 +126,8 @@ def make_function(client: ComClient, name: str, args: list, doc: str = None, **k
 
         parameters.append(
             inspect.Parameter(
-                name=arg_name, annotation=annotation, kind=inspect._ParameterKind.POSITIONAL_OR_KEYWORD)
+                name=arg_name, annotation=annotation,
+                kind=inspect._ParameterKind.POSITIONAL_OR_KEYWORD)
         )
     signature = signature.replace(parameters=parameters)
     _func.__signature__ = signature
@@ -181,10 +182,12 @@ class Client:
             major, minor, _ = [int(v) for v in version.split('.')]
             if major != __major__:
                 raise RuntimeWarning(
-                    f'version mismatch: server is using slapdash version `{version}`, but client is using version `{__version__}`')
+                    f'version mismatch: server is using slapdash version `{version}`, '
+                    +'but client is using version `{__version__}`')
             elif minor != __minor__:
                 print(
-                    f'version mismatch: server is using slapdash version `{version}`, but client is using version `{__version__}`')
+                    f'version mismatch: server is using slapdash version `{version}`, '
+                    +'but client is using version `{__version__}`')
         name = client('name')
         props = client('get_props')
 
@@ -211,7 +214,7 @@ class SimpleRequestClient:
         url = self._url
         timeout = self._timeout
         return object.__getattribute__(self, '__call__')(url+'get_param?name='+obj, timeout)
-    
+
     def set(self, name: str, value: Any) -> None:
         params = {'value': value}
         endpoint = re.sub('\]', '', re.sub('\.|\[', '/', name))  # noqa
@@ -235,4 +238,3 @@ class SimpleClient:
         client = SimpleRequestClient(hostname=hostname, port=port, timeout=timeout)
 
         return client
-
