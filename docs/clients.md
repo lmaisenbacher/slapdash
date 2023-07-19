@@ -33,20 +33,13 @@ class Device:
 slapdash.run(Device(), host=hostname, rpc_port=6001, web_port=8001)
 ```
 
-slapdash implements clients for the two type of supported servers, `rpc` and `request`
+slapdash implements a HTTP request client
 
-=== "rpc"
-
-    ```python
-    from slapdash import Client
-    client = Client(hostname, port=6001, client_type='rpc')
-    ```
-
-=== "request"
+=== `request`
 
     ```python
     from slapdash import Client
-    client = Client(hostname, port=8001, client_type='request')
+    client = Client(hostname, port=8001)
     ```
 
 And they both provide the same access to the dashboard. The exposed objects in the interface can be nicely accessed as attributes of the client -- and tab completion works too!
