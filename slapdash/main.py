@@ -9,7 +9,7 @@ from .version import __version__
 
 def run(interface,
         host: str='0.0.0.0',
-        port: int=8000,
+        port: int=8001,
         enable_web: bool=True,
         servers: list=[],
         loop=None,

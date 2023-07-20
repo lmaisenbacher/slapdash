@@ -414,7 +414,7 @@ class Model:
                 # variables created in __init__ will not be in __class__, but cannot be decorated anyway
                 except AttributeError:
                     pass
-                
+
                 value = interface.__getattribute__(name)
                 obj = Model(value, parent=self, name=name)
                 self._props[name] = {

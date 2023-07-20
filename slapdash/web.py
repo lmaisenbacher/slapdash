@@ -371,7 +371,7 @@ def get_shape(lst, shape=()):
             raise ValueError(msg)
 
     shape += (len(lst), )
-    
+
     # recurse
     shape = get_shape(lst[0], shape)
 
