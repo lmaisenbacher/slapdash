@@ -42,7 +42,7 @@ slapdash implements a HTTP request client
     client = Client(hostname, port=8001)
     ```
 
-And they both provide the same access to the dashboard. The exposed objects in the interface can be nicely accessed as attributes of the client -- and tab completion works too!
+The exposed objects in the interface can be nicely accessed as attributes of the client -- and tab completion works too!
 
 ## Attributes, properties, objects
 
